@@ -1,0 +1,35 @@
+name: Automated Tests
+
+on: [push]
+
+jobs:
+  test_lowest_number:
+    name: Test Lowest Number Program
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+
+      # Test 1
+      - name: Run Test 1
+        run: |
+          python find_lowest_number.py test_data/test1_input.txt output1.txt
+          diff test_data/test1_expected.txt output1.txt
+
+      # Test 2
+      - name: Run Test 2
+        run: |
+          python find_lowest_number.py test_data/test2_input.txt output2.txt
+          diff test_data/test2_expected.txt output2.txt
+
+      # Test 3
+      - name: Run Test 3
+        run: |
+          python find_lowest_number.py test_data/test3_input.txt output3.txt
+          diff test_data/test3_expected.txt output3.txt
